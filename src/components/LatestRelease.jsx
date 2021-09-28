@@ -22,10 +22,10 @@ const categories = {
 // Card element(s)
 function displayBooks(book) {
   return (
-    <div key={book.asin} className="col-3" style={{padding: "0.5rem"}}>
+    <div key={book.asin} className="col-6 col-md-4 col-lg-3" style={{padding: "0.5rem"}}>
     <Card>
       <Card.Img className="img-fluid" variant="top" src={book.img} style={{height: "300px"}}/>
-    <Card.Body style={{height: "100px"}}>
+    <Card.Body className="bg-light" style={{height: "100px"}}>
       <h6>{book.title}</h6>
     </Card.Body>
     </Card>
@@ -38,12 +38,12 @@ class LatestRelease extends React.Component {
   render() {
     // Note to myself:
     // Prop 'category' value comes in string form.
-    // Hence, in order to component dynamically, insert imported .json files to object
+    // Hence, in order to use component dynamically, insert imported .json files to object
     // Access the object with bracket notation in order to use the correct list to loop through.
     const category = this.props.category;
     return (
       <Container className="mt-5">
-        <h3>{category.toUpperCase()}</h3>
+        <h3 style={{textTransform: "capitalize"}}>{category}</h3>
           <Row>
             {
               categories[category].map(displayBooks)
