@@ -10,8 +10,6 @@ function App() {
     <AppNavigation/>
     <Welcome/>
     <LatestRelease category="fantasy"/>
-    <LatestRelease category="horror"/>
-    <LatestRelease category="scifi"/>
     <MyFooter/>
     </>
   );
