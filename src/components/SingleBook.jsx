@@ -9,7 +9,7 @@ const apiKey = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTU1OWUy
 class SingleBook extends React.Component {
   state = {
     id: this.props.book.asin,
-    title: this.props.book.title,
+
     selected: false,
     comments: [],
   }
@@ -39,24 +39,25 @@ class SingleBook extends React.Component {
     return (
       <div
         className="col-6 col-md-4 col-lg-3"
-        style={{ padding: "0.5rem" }}
-        onClick = {() => {
-          this.setState({
-            id: this.state.id,
-            title: this.state.title,
-            selected: true, /* this.state.selected === true ? false : true */
-          })
-          this.fetchById();
-        }}
+        style={{ padding: "0.5rem", cursor: "pointer" }}
+       
       >
         <Card>
           <Card.Img
             className="img-fluid"
             src={this.props.book.img}
             style={{ height: "300px", Maxwidth: "100%" }}
+            onClick = {() => {
+            this.setState({
+              id: this.state.id,
+              title: this.state.title,
+              selected: this.state.selected === true ? false : true
+            })
+            this.fetchById();
+        }}
           />
           <Card.Body className="bg-light" style={{ minHeight: "120px", maxHeight:"auto"}}>
-            <h6>{this.state.title}</h6>
+            <h6>{this.props.book.title}</h6>
             { 
               this.state.selected && this.state.comments.length > 0 &&
                 this.state.comments.map((comment) => {
