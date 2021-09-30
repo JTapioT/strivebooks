@@ -2,14 +2,12 @@ import Card from "react-bootstrap/Card";
 import React from "react";
 import BookComment from "./BookComment";
 import BookCommentForm from "./BookCommentForm";
-// Where to actually store this?
-const apiKey = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTU1OWUyZGZmNjlkODAwMTU1OWI5YWMiLCJpYXQiOjE2MzMwMDEwMDYsImV4cCI6MTYzNDIxMDYwNn0.PSE3lytW0Er7jsprQrcuXiEjXpmg3SqxkqB1vsu5m6k";
+
 
 
 class SingleBook extends React.Component {
   state = {
     id: this.props.book.asin,
-
     selected: false,
     comments: [],
   }
@@ -19,7 +17,7 @@ class SingleBook extends React.Component {
       let response = await (fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.state.id}`, {
         method: "GET",
         headers: {
-          "Authorization": apiKey,
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTU1OWUyZGZmNjlkODAwMTU1OWI5YWMiLCJpYXQiOjE2MzMwMDEwMDYsImV4cCI6MTYzNDIxMDYwNn0.PSE3lytW0Er7jsprQrcuXiEjXpmg3SqxkqB1vsu5m6k",
         }
       }))
 
@@ -49,7 +47,6 @@ class SingleBook extends React.Component {
             onClick = {() => {
             this.setState({
               id: this.state.id,
-              title: this.state.title,
               selected: this.state.selected === true ? false : true
             })
             this.fetchById();
@@ -68,7 +65,7 @@ class SingleBook extends React.Component {
             }
             {
               this.state.selected &&
-              <BookCommentForm/>
+              <BookCommentForm bookId={this.props.book.asin}/>
             }
           </Card.Body>
         </Card>
