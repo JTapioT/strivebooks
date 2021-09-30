@@ -39,14 +39,13 @@ class SingleBook extends React.Component {
     return (
       <div
         className="col-6 col-md-4 col-lg-3"
-        style={{ padding: "0.5rem", cursor: "pointer" }}
-       
+        style={{ padding: "0.5rem"}}
       >
         <Card>
           <Card.Img
             className="img-fluid"
             src={this.props.book.img}
-            style={{ height: "300px", Maxwidth: "100%" }}
+            style={{ height: "300px", Maxwidth: "100%", cursor: "pointer"}}
             onClick = {() => {
             this.setState({
               id: this.state.id,
