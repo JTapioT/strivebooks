@@ -1,11 +1,11 @@
-import fantasy from '../data/fantasy.json'
-import history from '../data/history.json'
-import horror from '../data/horror.json'
-import romance from '../data/romance.json'
-import scifi from '../data/scifi.json'
+import fantasy from '../data/fantasy.json';
+import history from '../data/history.json';
+import horror from '../data/horror.json';
+import romance from '../data/romance.json';
+import scifi from '../data/scifi.json';
+import SingleBook from './SingleBook';
 import React from 'react';
 import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
@@ -19,30 +19,11 @@ const categories = {
 }
 
 
-
-// Card element(s)
-function displayBooks(book) {
-  return (
-    <div key={book.asin} className="col-6 col-md-4 col-lg-3" style={{padding: "0.5rem"}}>
-    <Card>
-      <Card.Img className="img-fluid" src={book.img} style={{height: "300px", Maxwidth: "100%"}}/>
-    <Card.Body className="bg-light" style={{height: "100px"}}>
-      <h6>{book.title}</h6>
-    </Card.Body>
-    </Card>
-    </div>
-  )
-}
-
-
 class LatestRelease extends React.Component {
-
-  
 
   state = {
     category: "Fantasy"
   }
-
 
   render() {
     // Note to myself:
@@ -65,7 +46,10 @@ class LatestRelease extends React.Component {
         <h3 style={{ textTransform: "capitalize" }}>{this.state.category}</h3>
         <Row>{
         this.state.category &&
-        categories[this.state.category.toLowerCase()].map(displayBooks)}</Row>
+        categories[this.state.category.toLowerCase()].map((book) => {
+          return <SingleBook key={book.asin} book={book}/>
+        }
+        )}</Row>
       </Container>
     );
   }
