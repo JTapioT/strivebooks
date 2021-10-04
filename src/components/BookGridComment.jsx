@@ -1,15 +1,12 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
+import React from 'react';
+import Button from "react-bootstrap/Button"
 
 
-class BookComment extends React.Component {
+class BookGridComment extends React.Component {
 
   state = {
-    isDeleted: false
+    isDeleted: false,
   }
-
-  // Spice it up with some slice..
-  // slice from first character until "@" character
 
   async deleteComment() {
     try {
@@ -31,15 +28,15 @@ class BookComment extends React.Component {
     }
   }
 
-
   render() {
-    
-      return this.state.isDeleted === true ? null : (
-        <div
-          className="d-flex flex-column py-3 text-monospace"
+    return this.state.isDeleted === true ? null : (
+      
+          <div
+          className="d-flex justify-content-between align-items-end py-3 text-monospace"
           key={this.props.comment.elementId}
-          style={{ borderTop: "1px solid #ccc" }}
+          style={{ borderBottom: "1px solid #ccc" }}
         >
+          <div className="d-flex flex-column">
           <blockquote className="blockquote">
             <p className="m-0">{this.props.comment.comment}</p>
             <footer className="blockquote-footer">
@@ -51,7 +48,6 @@ class BookComment extends React.Component {
               </cite>
             </footer>
           </blockquote>
-          <div className="d-flex align-items-center justify-content-between mt-4">
             <Button
               variant="danger"
               onClick={() => {
@@ -60,18 +56,18 @@ class BookComment extends React.Component {
             >
               Delete Comment
             </Button>
+          </div>
+          <div className="d-flex align-items-center justify-content-between mt-4">
             <p
               className="badge badge-success m-0"
-              style={{ fontSize: "1.5rem" }}
+              style={{ fontSize: "2rem" }}
             >
               {this.props.comment.rate}
             </p>
           </div>
         </div>
-      );
-    
-
+    )
   }
 }
 
-export default BookComment;
+export default BookGridComment;
