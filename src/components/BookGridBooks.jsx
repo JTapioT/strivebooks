@@ -8,7 +8,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
 import BookGridComment from "./BookGridComment";
 import BookCommentForm from './BookCommentForm';
 
@@ -26,7 +25,7 @@ class BookGridBooks extends React.Component {
     category: "Fantasy",
     isCategoryChanged: false,
     selectedBookID: null,
-    comments: []
+    comments: [],
   };
 
   async fetchComments() {
@@ -90,13 +89,11 @@ class BookGridBooks extends React.Component {
         </Form.Group>
         <h3 style={{ textTransform: "capitalize" }}>{this.state.category}</h3>
         <Row>
-          <Col md={9}>
-            <Row>
+          <div className="col-6">
               {this.state.category &&
                 categories[this.state.category.toLowerCase()].map((book) => {
                   return (
                     <div
-                      className="col-4"
                       style={{ padding: "0.5rem" }}
                       key={book.asin}
                       onClick={() => {
@@ -126,9 +123,9 @@ class BookGridBooks extends React.Component {
                     </div>
                   );
                 })}
-            </Row>
-          </Col>
-          <Col md={3}>
+            </div>
+            <div className="col-6">
+            <div className="d-flex flex-column" style={{height:"420px", overflow: "scroll"}}>
             {
               this.state.comments.length > 0 && !this.state.isCategoryChanged &&
               this.state.comments.map((comment) => {
@@ -137,11 +134,12 @@ class BookGridBooks extends React.Component {
                 )
               })
             }
+            </div>
             {
               this.state.selectedBookID !== null && !this.state.isCategoryChanged &&
               <BookCommentForm bookId={this.state.selectedBookID}/>
             }
-          </Col>
+            </div>
         </Row>
       </Container>
     );

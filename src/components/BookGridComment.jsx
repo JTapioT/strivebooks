@@ -38,7 +38,7 @@ class BookGridComment extends React.Component {
         >
           <div className="d-flex flex-column">
           <blockquote className="blockquote">
-            <p className="m-0">{this.props.comment.comment}</p>
+            <p className="m-0" style={{fontSize: "1.4rem"}}>{this.props.comment.comment}</p>
             <footer className="blockquote-footer">
               <cite title="Source Title">
                 {this.props.comment.author.slice(
