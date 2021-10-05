@@ -1,6 +1,6 @@
 import AppNavigation from "./components/AppNavigation";
 import Welcome from "./components/Welcome";
-import LatestRelease from "./components/LatestRelease";
+/* import LatestRelease from "./components/LatestRelease"; */
 import MyFooter from "./components/MyFooter";
 import React from "react";
 import BookGridBooks from "./components/BookGridBooks";
@@ -17,7 +17,7 @@ class App extends React.Component {
       <AppNavigation/>
       <Welcome/>
       <BookGridBooks/>
-      <LatestRelease category={this.props.category}/>
+     {/*  <LatestRelease category={this.props.category}/> */}
       <MyFooter/>
       </>
     );

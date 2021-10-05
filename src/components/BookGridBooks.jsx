@@ -3,7 +3,7 @@ import history from "../data/history.json";
 import horror from "../data/horror.json";
 import romance from "../data/romance.json";
 import scifi from "../data/scifi.json";
-import React from "react";
+import {useState, useEffect} from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
@@ -21,7 +21,129 @@ const categories = {
   scifi,
 };
 
-class BookGridBooks extends React.Component {
+function BookGridBooks () {
+
+  const [category, setCategory] = useState("Fantasy");
+  const [isCategoryChanged, setCategoryChange] = useState(false);
+  const [selectedBookID, setSelectedBookID] = useState(null);
+  const [comments, setComments] = useState([]);
+
+  
+  async function fetchComments() {
+    try {
+      let response = await (fetch(`https://striveschool-api.herokuapp.com/api/comments/${selectedBookID}`, {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTU1OWUyZGZmNjlkODAwMTU1OWI5YWMiLCJpYXQiOjE2MzMwMDEwMDYsImV4cCI6MTYzNDIxMDYwNn0.PSE3lytW0Er7jsprQrcuXiEjXpmg3SqxkqB1vsu5m6k",
+        }
+      }))
+
+      if(response.ok) {
+        let bookComments = await response.json();
+        console.log(bookComments);
+        setCategoryChange(false);
+        setComments(bookComments);
+        /* this.setState({
+          ...this.state,
+          isCategoryChanged: false,
+          comments: bookComments
+        }) */
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {fetchComments()}, [selectedBookID])
+
+  useEffect(() => {setCategoryChange(true)}, [category])
+
+  return (
+      <Container className="mt-5">
+        <Form.Group
+          controlId="exampleForm.ControlSelect1"
+          style={{ width: "30%" }}
+        >
+          <Form.Label>Select Category</Form.Label>
+          <Form.Control
+            as="select"
+            onChange={(event) => {
+              setCategory(event.target.value);
+              //this.setState({ category: event.target.value });
+            }}
+          >
+            <option>Fantasy</option>
+            <option>History</option>
+            <option>Scifi</option>
+            <option>Horror</option>
+            <option>Romance</option>
+          </Form.Control>
+        </Form.Group>
+        <h3 style={{ textTransform: "capitalize" }}>{category}</h3>
+        <Row>
+          <Col md={9}>
+            <Row>
+              {category &&
+                categories[category.toLowerCase()].map((book) => {
+                  return (
+                    <div
+                      className="col-4"
+                      style={{ padding: "0.5rem" }}
+                      key={book.asin}
+                      onClick={() => {
+                        setSelectedBookID(book.asin);
+                        /* this.setState({
+                          ...this.state,
+                          selectedBookID: book.asin
+                        }) */
+                      }}
+                    >
+                      <Card>
+                        <Card.Img
+                          className="img-fluid"
+                          src={book.img}
+                          style={{
+                            height: "300px",
+                            Maxwidth: "100%",
+                            cursor: "pointer",
+                          }}
+                        />
+                        <Card.Body
+                          className="bg-light"
+                          style={{ minHeight: "120px", maxHeight: "auto" }}
+                        >
+                          <h6>{book.title}</h6>
+                        </Card.Body>
+                      </Card>
+                    </div>
+                  );
+                })}
+            </Row>
+          </Col>
+          <Col md={3}>
+            <div style={{paddingTop: "0.5rem"}}>
+            {
+              comments.length > 0 && !isCategoryChanged &&
+              comments.map((comment) => {
+                return(
+                  <BookGridComment key={comment._id} comment={comment}/>
+                )
+              })
+            }
+            {
+              selectedBookID !== null && !isCategoryChanged &&
+              <BookCommentForm bookId={selectedBookID}/>
+            }
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    );
+}
+
+
+
+/* class BookGridBooks extends React.Component {
   state = {
     category: "Fantasy",
     isCategoryChanged: false,
@@ -146,6 +268,6 @@ class BookGridBooks extends React.Component {
       </Container>
     );
   }
-}
+} */
 
 export default BookGridBooks;
