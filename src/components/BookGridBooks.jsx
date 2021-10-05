@@ -125,7 +125,10 @@ class BookGridBooks extends React.Component {
                 })}
             </div>
             <div className="col-6">
-            <div className="d-flex flex-column" style={{height:"420px", overflow: "scroll"}}>
+            <div className="d-flex justify-content-around" style={{ padding: "0.5rem"}}>
+            <div className="d-flex flex-column mr-4" style={{height:"420px", width: "100%"}}>
+            <h6>{this.state.comments.length > 0 ? "Comments" : null}</h6>
+            <div style={{overflow:"scroll"}}>
             {
               this.state.comments.length > 0 && !this.state.isCategoryChanged &&
               this.state.comments.map((comment) => {
@@ -135,10 +138,12 @@ class BookGridBooks extends React.Component {
               })
             }
             </div>
+            </div>
             {
               this.state.selectedBookID !== null && !this.state.isCategoryChanged &&
               <BookCommentForm bookId={this.state.selectedBookID}/>
             }
+            </div>
             </div>
         </Row>
       </Container>

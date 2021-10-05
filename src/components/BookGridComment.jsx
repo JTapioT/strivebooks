@@ -34,11 +34,11 @@ class BookGridComment extends React.Component {
           <div
           className="d-flex justify-content-between align-items-end py-3 text-monospace"
           key={this.props.comment.elementId}
-          style={{ borderBottom: "1px solid #ccc" }}
+          style={{ borderBottom: "1px solid #ccc", paddingRight: "1rem"}}
         >
           <div className="d-flex flex-column">
           <blockquote className="blockquote">
-            <p className="m-0" style={{fontSize: "1.4rem"}}>{this.props.comment.comment}</p>
+            <p className="m-0" style={{fontSize: "1.3rem"}}>{this.props.comment.comment}</p>
             <footer className="blockquote-footer">
               <cite title="Source Title">
                 {this.props.comment.author.slice(

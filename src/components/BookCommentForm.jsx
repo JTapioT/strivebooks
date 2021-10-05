@@ -52,11 +52,11 @@ class BookCommentForm extends React.Component {
     return (
       this.state.commentSubmitted ? 
       <Alert variant={"success"}>Comment submitted successfully!</Alert> :
-      <>
-        <h6 style={{ paddingTop: "1rem", borderTop: "2px solid #ccc" }}>
+      <div className="d-flex flex-column w-100">
+        <h6>
           Add your comment
         </h6>
-        <Form onSubmit={(event) => {this.handleCommentSubmit(event)}} className="mt-3">
+        <Form onSubmit={(event) => {this.handleCommentSubmit(event)}} className="mt-3" style={{borderBottom: "2px solid #ccc", height:"100%"}}>
         {/*  <Form.Group controlId="exampleForm.ControlInput1" className="mt-3">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -93,7 +93,7 @@ class BookCommentForm extends React.Component {
           </Form.Group>
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Your comment</Form.Label>
-            <Form.Control as="textarea" rows={3} onChange={(event) => {
+            <Form.Control as="textarea" rows={7} onChange={(event) => {
               this.setState({
                 body: {
                   ...this.state.body,
@@ -107,7 +107,7 @@ class BookCommentForm extends React.Component {
             Submit comment
           </Button>
         </Form>
-      </>
+      </div>
     );
   }
 }
