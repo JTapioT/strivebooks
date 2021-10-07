@@ -18,7 +18,6 @@ function BookGridComment(props) {
       );
 
       if (response.ok) {
-        console.log(response);
         setCommentDeleted(true);
       }
     } catch (error) {

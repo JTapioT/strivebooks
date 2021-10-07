@@ -4,6 +4,8 @@ import Welcome from "./components/Welcome";
 import MyFooter from "./components/MyFooter";
 import React from "react";
 import BookGridBooks from "./components/BookGridBooks";
+import Register from "./components/Register";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
 class App extends React.Component {
 
@@ -13,12 +15,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <> 
+      <>
+      <Router>
       <AppNavigation/>
-      <Welcome/>
-      <BookGridBooks/>
-     {/*  <LatestRelease category={this.props.category}/> */}
+      <Route path="/" exact component={Welcome}/>
+      <Route path="/" exact component={BookGridBooks}/>
+      <Route path="/register" exact component={Register}/>
       <MyFooter/>
+      </Router>
+     {/*  <LatestRelease category={this.props.category}/> */}
       </>
     );
   }

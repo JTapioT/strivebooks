@@ -40,20 +40,14 @@ function BookGridBooks () {
 
       if(response.ok) {
         let bookComments = await response.json();
-        console.log(bookComments);
         setCategoryChange(false);
         setComments(bookComments);
-        /* this.setState({
-          ...this.state,
-          isCategoryChanged: false,
-          comments: bookComments
-        }) */
       }
     } catch (error) {
       console.log(error);
     }
   }
-
+//eslint-disable-next-line
   useEffect(() => {fetchComments()}, [selectedBookID])
 
   useEffect(() => {setCategoryChange(true)}, [category])
@@ -69,7 +63,6 @@ function BookGridBooks () {
             as="select"
             onChange={(event) => {
               setCategory(event.target.value);
-              //this.setState({ category: event.target.value });
             }}
           >
             <option>Fantasy</option>
@@ -92,10 +85,6 @@ function BookGridBooks () {
                       key={book.asin}
                       onClick={() => {
                         setSelectedBookID(book.asin);
-                        /* this.setState({
-                          ...this.state,
-                          selectedBookID: book.asin
-                        }) */
                       }}
                     >
                       <Card>
